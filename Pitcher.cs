@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand_3DayStarter
 {
-    abstract class Item         
+    class Pitcher
     {
         // member variables
-        public string name;
+        public int cupsLeftInPitcher;
 
         // constructor
-        static Item()
+        public Pitcher()
         {
-            
+            cupsLeftInPitcher = 0;
         }
 
         // member methods

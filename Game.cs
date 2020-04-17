@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand_3DayStarter
 {
-    abstract class Item         
+    class Game
     {
         // member variables
-        public string name;
+        private Player player;
+        private List<Day> days;
+        private int currentDay;
 
         // constructor
-        static Item()
+        public Game()
         {
-            
+            days = new List<Day>();
         }
 
         // member methods
+        public void RunGame()
+        {
+
+        }
     }
 }

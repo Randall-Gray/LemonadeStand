@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand_3DayStarter
 {
-    abstract class Item         
+    class Recipe
     {
         // member variables
-        public string name;
+        public int amountOfLemons;
+        public int amountOfSugarCubes;
+        public int amountOfIceCubes;
+        public double pricePerCup;
 
         // constructor
-        static Item()
+        public Recipe()
         {
-            
+
         }
 
         // member methods

@@ -8,13 +8,14 @@ namespace LemonadeStand_3DayStarter
 {
     class Store
     {
-        // member variables (HAS A)
+        // member variables
+        // assume Store has an infinite amount of each item.
         private double pricePerLemon;
         private double pricePerSugarCube;
         private double pricePerIceCube;
         private double pricePerCup;
 
-        // constructor (SPAWNER)
+        // constructor
         public Store()
         {
             pricePerLemon = .5;
@@ -23,21 +24,21 @@ namespace LemonadeStand_3DayStarter
             pricePerCup = .25;
         }
 
-        // member methods (CAN DO)
+        // member methods
         public void SellLemons(Player player)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons");
+            int lemonsToPurchase = UserInterface.GetNumberOfItemsToBuy("lemons");
             double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
             if(player.wallet.Money >= transactionAmount)
             {
-                player.wallet.PayMoneyForItems(transactionAmount);
+                PerformTransaction(player.wallet, transactionAmount);
                 player.inventory.AddLemonsToInventory(lemonsToPurchase);
             }
         }
 
         public void SellSugarCubes(Player player)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar");
+            int sugarToPurchase = UserInterface.GetNumberOfItemsToBuy("sugar");
             double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -48,7 +49,7 @@ namespace LemonadeStand_3DayStarter
 
         public void SellIceCubes(Player player)
         {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes");
+            int iceCubesToPurchase = UserInterface.GetNumberOfItemsToBuy("ice cubes");
             double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -59,7 +60,7 @@ namespace LemonadeStand_3DayStarter
 
         public void SellCups(Player player)
         {
-            int cupsToPurchase = UserInterface.GetNumberOfItems("cups");
+            int cupsToPurchase = UserInterface.GetNumberOfItemsToBuy("cups");
             double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
             if(player.wallet.Money >= transactionAmount)
             {

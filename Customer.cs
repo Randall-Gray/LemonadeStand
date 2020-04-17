@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand_3DayStarter
 {
-    abstract class Item         
+    abstract class Customer
     {
         // member variables
+        private List<string> names;
         public string name;
 
         // constructor
-        static Item()
+        public Customer()
         {
-            
+            names = new List<string>();
         }
 
         // member methods

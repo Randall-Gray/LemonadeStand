@@ -8,14 +8,14 @@ namespace LemonadeStand_3DayStarter
 {
     class SugarCube : Item
     {
-        // member variables (HAS A)
+        // member variables
 
-        // constructor (SPAWNER)
+        // constructor
         public SugarCube()
         {
             name = "sugar cube";
         }
 
-        // member methods (CAN DO)
+        // member methods
     }
 }

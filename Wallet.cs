@@ -8,8 +8,10 @@ namespace LemonadeStand_3DayStarter
 {
     class Wallet
     {
+        // member variables
         private double money;
 
+        // assossor methods
         public double Money
         {
             get
@@ -18,14 +20,21 @@ namespace LemonadeStand_3DayStarter
             }
         }
 
+        // constructor
         public Wallet()
         {
             money = 20.00;
         }
 
+        // member methods
         public void PayMoneyForItems(double transactionAmount)
         {
             money -= transactionAmount;
+        }
+
+        public void PocketMoneyFromSales(double moneyFromSales)
+        {
+            money += moneyFromSales;
         }
     }
 }

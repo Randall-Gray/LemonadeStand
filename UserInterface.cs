@@ -8,7 +8,9 @@ namespace LemonadeStand_3DayStarter
 {
     static class UserInterface
     {
-        public static int GetNumberOfItems(string itemsToGet)
+        // member methods
+        // Gets input of number of items to buy from the store.
+        public static int GetNumberOfItemsToBuy(string itemsToGet)
         {
             bool userInputIsAnInteger = false;
             int quantityOfItem = -1;

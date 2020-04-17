@@ -8,14 +8,14 @@ namespace LemonadeStand_3DayStarter
 {
     class Lemon : Item
     {
-        // member variables (HAS A)
+        // member variables
 
-        // constructor (SPAWNER)
+        // constructor
         public Lemon()
         {
             name = "lemon";
         }
 
-        // member methods (CAN DO)
+        // member methods
     }
 }

@@ -10,6 +10,19 @@ namespace LemonadeStand_3DayStarter
     {
         static void Main(string[] args)
         {
+            Game lemonadeStand = new Game();        
+
+            do
+            {
+                Console.Clear();
+
+                lemonadeStand.RunGame();
+
+                Console.WriteLine("\nWould you like to play again? (Y/N)");
+                if (Console.ReadLine().ToUpper() != "Y")
+                    break;
+            }
+            while (true);
 
         }
     }
