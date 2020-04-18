@@ -21,9 +21,9 @@ namespace LemonadeStand_3DayStarter
         }
 
         // constructor
-        public Wallet()
+        public Wallet(double startMoney = 20.00)
         {
-            money = 20.00;
+            money = startMoney;
         }
 
         // member methods

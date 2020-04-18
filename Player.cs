@@ -16,8 +16,9 @@ namespace LemonadeStand_3DayStarter
         public Pitcher pitcher;
 
         // constructor
-        public Player()
+        public Player(string name)
         {
+            this.name = name;
             inventory = new Inventory();
             wallet = new Wallet();
             recipe = new Recipe();
