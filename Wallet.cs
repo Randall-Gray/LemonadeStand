@@ -10,6 +10,7 @@ namespace LemonadeStand_3DayStarter
     {
         // member variables
         private double money;
+        private double startMoney;
 
         // assossor methods
         public double Money
@@ -20,9 +21,19 @@ namespace LemonadeStand_3DayStarter
             }
         }
 
+        public double StartMoney
+        {
+            get
+            {
+                return startMoney;
+            }
+        }
+
+
         // constructor
         public Wallet(double startMoney = 20.00)
         {
+            this.startMoney = startMoney;
             money = startMoney;
         }
 

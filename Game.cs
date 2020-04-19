@@ -26,25 +26,37 @@ namespace LemonadeStand_3DayStarter
         {
             UserInterface.Welcome();
             player = new Player(UserInterface.GetPlayerName());
-            currentDay = InitializeDays();
+            InitializeDays();
 
+            for (currentDay = 0; currentDay < days.Count; currentDay++)
+            {
+                Console.Clear();
+                Console.WriteLine(player.name + "'s Lemonade Stand");
+                Console.WriteLine("\nDay " + (currentDay + 1) + " of " + days.Count);
+                days[currentDay].weather.DisplayWeather();
+                player.recipe.SetRecipe();
+                player.inventory.PurchaseItems(store, player.wallet);
+
+                days[currentDay].RunDay(player);
+
+                UserInterface.DisplayDayGameStats(currentDay + 1, player.wallet.Money, player.wallet.StartMoney);
+            }
+            
+            UserInterface.DisplayEndGameStats(currentDay, player.wallet.Money, player.wallet.StartMoney);
 
 
             Console.ReadLine();
         }
 
-        // Gets number of days and initializes days list. Returns first day, 0 (no days - game over) or 1, based on user input.
-        private int InitializeDays()
+        // Gets number of days and initializes days list and the currentDay.
+        private void InitializeDays()
         {
             int numDays = UserInterface.GetNumberOfDays();
 
             for (int i = 0; i < numDays; i++)
                 days.Add(new Day());
 
-            if (numDays > 0)
-                return 1;       // first day
-            else
-                return 0;
+            currentDay = 0;
         }
     }
 }

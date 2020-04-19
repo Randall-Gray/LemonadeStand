@@ -25,6 +25,35 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
+        //public void SellItems(Player player)
+        //{
+        //    string item;
+
+
+
+        //    do
+        //    {
+        //        //item = UserInterface.PickItemForPurchase();
+        //        switch (item.ToUpper())
+        //        {
+        //            case "LEMONS":
+        //                SellLemons(player);
+        //                break;
+        //            case "SUGARCUBES":
+        //                SellSugarCubes(player);
+        //                break;
+        //            case "ICECUBES":
+        //                SellIceCubes(player);
+        //                break;
+        //            case "CUPS":
+        //                SellCups(player);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    } while (true);
+        //}
+
         public void SellLemons(Player player)
         {
             int lemonsToPurchase = UserInterface.GetNumberOfItemsToBuy("lemons");
@@ -38,7 +67,7 @@ namespace LemonadeStand_3DayStarter
 
         public void SellSugarCubes(Player player)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItemsToBuy("sugar");
+            int sugarToPurchase = UserInterface.GetNumberOfItemsToBuy("sugar cubes");
             double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
             if(player.wallet.Money >= transactionAmount)
             {

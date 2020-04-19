@@ -14,7 +14,7 @@ namespace LemonadeStand_3DayStarter
         // constructor
         static Item()
         {
-            
+
         }
 
         // member methods

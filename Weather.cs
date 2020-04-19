@@ -11,14 +11,14 @@ namespace LemonadeStand_3DayStarter
         // member variables
         public string condition;
         public int temperature;
-        private List<string> weatherConditions;
+        private static List<string> weatherConditions;
 
-        private Random weatherForcaster;
+        private static Random weatherForcaster;
 
         // constructor
         public Weather()
         {
-            weatherConditions = new List<string>() {"rain", "hazy", "cloudy", "Sunny and Clear" };
+            weatherConditions = new List<string>() {"Rain", "Hazy", "Cloudy", "Sunny and Clear"};
 
             weatherForcaster = new Random();
 
@@ -26,10 +26,16 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
+        // Allow weather to change during the day.
         public void SetCurrentWeather()
         {
             condition = weatherConditions[weatherForcaster.Next(0, weatherConditions.Count - 1)];
             temperature = weatherForcaster.Next(50, 100);
+        }
+
+        public void DisplayWeather()
+        {
+            Console.WriteLine("Weather: " + condition + "\tTemperature: " + temperature + "(F)");
         }
     }
 }

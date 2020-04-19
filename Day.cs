@@ -20,5 +20,10 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
+        public void RunDay(Player player)
+        {
+
+
+        }
     }
 }

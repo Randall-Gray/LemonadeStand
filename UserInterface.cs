@@ -53,5 +53,37 @@ namespace LemonadeStand_3DayStarter
 
             return quantityOfItem;
         }
+
+        // Get number of item for recipe.
+        public static int GetNumberOfItemsForRecipe(string recipeItem)
+        {
+            bool userInputIsAnInteger = false;
+            int quantityOfItem = -1;
+
+            while (!userInputIsAnInteger || quantityOfItem < 0)
+            {
+                Console.WriteLine("How many " + recipeItem + " would you like in the recipe?");
+                Console.WriteLine("Please enter a positive integer (or 0):");
+
+                userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
+            }
+
+            return quantityOfItem;
+        }
+
+
+        public static void DisplayDayGameStats(int day, double currentMoney, double startMoney)
+        {
+            Console.WriteLine("Total Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney-startMoney));
+            Console.ReadLine();
+        }
+
+        public static void DisplayEndGameStats(int days, double currentMoney, double startMoney)
+        {
+            Console.WriteLine("\nGAME OVER!");
+            Console.WriteLine("Total Profit after " + days + " days: Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
+
+        }
+
     }
 }
