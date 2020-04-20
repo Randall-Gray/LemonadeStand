@@ -28,8 +28,8 @@ namespace LemonadeStand_3DayStarter
 
             while (!userInputIsAnInteger || numberOfDays < 0)
             {
-                Console.WriteLine("How many days would you like to play?");
-                Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
+                Console.WriteLine("\nHow many days would you like to play?");
+                Console.WriteLine("Please enter a positive integer (or 0):");
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out numberOfDays);
             }
@@ -45,7 +45,7 @@ namespace LemonadeStand_3DayStarter
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {
-                Console.WriteLine("How many " + itemsToGet + " would you like to buy?");
+                Console.WriteLine("\nHow many " + itemsToGet + " would you like to buy?");
                 Console.WriteLine("Please enter a positive integer (or 0 to cancel):");
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
@@ -62,7 +62,7 @@ namespace LemonadeStand_3DayStarter
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {
-                Console.WriteLine("How many " + recipeItem + " would you like in the recipe?");
+                Console.WriteLine("\nHow many " + recipeItem + " would you like in the recipe?");
                 Console.WriteLine("Please enter a positive integer (or 0):");
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
@@ -71,10 +71,25 @@ namespace LemonadeStand_3DayStarter
             return quantityOfItem;
         }
 
+        public static double GetPricePerCup()
+        {
+            bool userInputIsADouble = false;
+            double cupCost = -1;
+
+            while (!userInputIsADouble || cupCost < 0)
+            {
+                Console.WriteLine("\nHow much would you like to charge for a cup of lemonade?");
+                Console.WriteLine("Please enter a positive dollar amount ($x.xx):");
+
+                userInputIsADouble = double.TryParse(Console.ReadLine(), out cupCost);
+            }
+
+            return cupCost;
+        }
 
         public static void DisplayDayGameStats(int day, double currentMoney, double startMoney)
         {
-            Console.WriteLine("Total Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney-startMoney));
+            Console.WriteLine("Total Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
             Console.ReadLine();
         }
 
@@ -82,8 +97,13 @@ namespace LemonadeStand_3DayStarter
         {
             Console.WriteLine("\nGAME OVER!");
             Console.WriteLine("Total Profit after " + days + " days: Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
-
         }
 
+        // Ask user if okay to continue or should repeat last step
+        public static bool Continue()
+        {
+            Console.WriteLine("\nEverything okay? (Y/N)");
+            return Console.ReadLine().ToUpper() == "Y";
+        }
     }
 }

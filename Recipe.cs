@@ -26,43 +26,23 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
-        public void SetRecipe()
+        public void SetRecipeAndPrice()
         {
             DisplayRecipe();
             amountOfLemons = UserInterface.GetNumberOfItemsForRecipe("lemons");
             amountOfSugarCubes = UserInterface.GetNumberOfItemsForRecipe("sugar cubes");
             amountOfIceCubes = UserInterface.GetNumberOfItemsForRecipe("ice cubes");
+            pricePerCup = UserInterface.GetPricePerCup();
             DisplayRecipe();
         }
 
         public void DisplayRecipe()
         {
-            Console.WriteLine("\nLemonade Recipe");
+            Console.WriteLine("\nLemonade Recipe  (per 12 cup pitcher)");
             Console.WriteLine("Lemons: " + amountOfLemons);
             Console.WriteLine("Sugar Cubes: " + amountOfSugarCubes);
             Console.WriteLine("Ice Cubes: " + amountOfIceCubes);
-        }
-
-        public void SetPricePerCup(Store store)
-        {
-            double costPerCup = amountOfLemons * store.
-            Console.WriteLine("\nPrice per cup: " + pricePerCup);
-
-            Console.WriteLine("Cost per cup: " + );
-            DisplayRecipe();
-            amountOfLemons = UserInterface.GetNumberOfItemsForRecipe("lemons");
-            amountOfSugarCubes = UserInterface.GetNumberOfItemsForRecipe("sugar cubes");
-            amountOfIceCubes = UserInterface.GetNumberOfItemsForRecipe("ice cubes");
-            DisplayRecipe();
-        }
-
-        public void DisplayRecipe()
-        {
-            Console.WriteLine("\nLemonade Recipe");
-            Console.WriteLine("Lemons: " + amountOfLemons);
-            Console.WriteLine("Sugar Cubes: " + amountOfSugarCubes);
-            Console.WriteLine("Ice Cubes: " + amountOfIceCubes);
-            Console.WriteLine("\nPrice per cup: " + pricePerCup + "\n");
+            Console.WriteLine("\nPrice per cup: {0:C}\n", pricePerCup);
         }
     }
 }

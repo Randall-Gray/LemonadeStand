@@ -24,9 +24,25 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
-        public void PurchaseItems(Store store, Wallet wallet)
+        public void PurchaseItems(Store store, Player player)
         {
+            Console.WriteLine("\nMoney: ${0:C}", player.wallet.Money);
+            DisplayInventory();
+            store.SellLemons(player);
+            store.SellSugarCubes(player);
+            store.SellIceCubes(player);
+            store.SellCups(player);
+            Console.WriteLine("\nMoney: ${0:N2}", player.wallet.Money);
+            DisplayInventory();
+        }
 
+        public void DisplayInventory()
+        {
+            Console.WriteLine("\nPlayer Inventory");
+            Console.WriteLine("Lemons: " + lemons.Count);
+            Console.WriteLine("Sugar Cubes: " + sugarCubes.Count);
+            Console.WriteLine("Ice Cubes: " + iceCubes.Count);
+            Console.WriteLine("Paper Cups: {0:N}", cups.Count);
         }
 
         public void AddLemonsToInventory(int numberOfLemons)

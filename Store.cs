@@ -56,46 +56,95 @@ namespace LemonadeStand_3DayStarter
 
         public void SellLemons(Player player)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItemsToBuy("lemons");
-            double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
-            if(player.wallet.Money >= transactionAmount)
+            bool validPurchase = false;
+            int lemonsToPurchase;
+            double transactionAmount;
+
+            do
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddLemonsToInventory(lemonsToPurchase);
-            }
+                lemonsToPurchase = UserInterface.GetNumberOfItemsToBuy("lemons");
+                transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
+
+                validPurchase = player.wallet.Money >= transactionAmount;
+                if (validPurchase)
+                {
+                    PerformTransaction(player.wallet, transactionAmount);
+                    player.inventory.AddLemonsToInventory(lemonsToPurchase);
+                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                }
+                else
+                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+            } while (!validPurchase);
         }
 
         public void SellSugarCubes(Player player)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItemsToBuy("sugar cubes");
-            double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
-            if(player.wallet.Money >= transactionAmount)
+            bool validPurchase = false;
+            int sugarToPurchase;
+            double transactionAmount;
+
+            do
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddSugarCubesToInventory(sugarToPurchase);
-            }
+                sugarToPurchase = UserInterface.GetNumberOfItemsToBuy("sugar cubes");
+                transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
+
+                validPurchase = player.wallet.Money >= transactionAmount;
+                if (validPurchase)
+                {
+                    PerformTransaction(player.wallet, transactionAmount);
+                    player.inventory.AddSugarCubesToInventory(sugarToPurchase);
+                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                }
+                else
+                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+            } while (!validPurchase);
         }
 
         public void SellIceCubes(Player player)
         {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItemsToBuy("ice cubes");
-            double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
-            if(player.wallet.Money >= transactionAmount)
+            bool validPurchase = false;
+            int iceCubesToPurchase;
+            double transactionAmount;
+
+            do
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
-            }
+                iceCubesToPurchase = UserInterface.GetNumberOfItemsToBuy("ice cubes");
+                transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
+
+                validPurchase = player.wallet.Money >= transactionAmount;
+                if (validPurchase)
+                {
+                    PerformTransaction(player.wallet, transactionAmount);
+                    player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
+                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                }
+                else
+                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+            } while (!validPurchase);
         }
 
         public void SellCups(Player player)
         {
-            int cupsToPurchase = UserInterface.GetNumberOfItemsToBuy("cups");
-            double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
-            if(player.wallet.Money >= transactionAmount)
+            bool validPurchase = false;
+            int cupsToPurchase;
+            double transactionAmount;
+
+            do
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddCupsToInventory(cupsToPurchase);
-            }
+                cupsToPurchase = UserInterface.GetNumberOfItemsToBuy("cups");
+                transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
+
+                validPurchase = player.wallet.Money >= transactionAmount;
+
+                if (validPurchase)
+                {
+                    PerformTransaction(player.wallet, transactionAmount);
+                    player.inventory.AddCupsToInventory(cupsToPurchase);
+                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                }
+                else
+                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+            } while (!validPurchase);
         }
 
         private double CalculateTransactionAmount(int itemCount, double itemPricePerUnit)
