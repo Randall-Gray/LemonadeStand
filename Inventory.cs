@@ -42,7 +42,7 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine("Lemons: " + lemons.Count);
             Console.WriteLine("Sugar Cubes: " + sugarCubes.Count);
             Console.WriteLine("Ice Cubes: " + iceCubes.Count);
-            Console.WriteLine("Paper Cups: {0:N}", cups.Count);
+            Console.WriteLine("Paper Cups: " + cups.Count);
         }
 
         public void AddLemonsToInventory(int numberOfLemons)

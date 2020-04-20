@@ -89,7 +89,7 @@ namespace LemonadeStand_3DayStarter
 
         public static void DisplayDayGameStats(int day, double currentMoney, double startMoney)
         {
-            Console.WriteLine("Total Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
+            Console.WriteLine("\nTotal Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
             Console.ReadLine();
         }
 

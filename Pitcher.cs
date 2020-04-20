@@ -9,7 +9,7 @@ namespace LemonadeStand_3DayStarter
     class Pitcher
     {
         // member variables
-        private int maxCupsInPitcher;
+        public int maxCupsInPitcher;
         public int cupsLeftInPitcher;
 
         // constructor
