@@ -10,50 +10,21 @@ namespace LemonadeStand_3DayStarter
     {
         // member variables
         // assume Store has an infinite amount of each item.
-        private double pricePerLemon;
-        private double pricePerSugarCube;
-        private double pricePerIceCube;
-        private double pricePerCup;
+        public double pricePerLemon { get; }
+        public double pricePerSugarCube { get; }
+        public double pricePerIceCube { get; }
+        public double pricePerCup { get; }
 
         // constructor
         public Store()
         {
-            pricePerLemon = .5;
-            pricePerSugarCube = .1;
-            pricePerIceCube = .01;
-            pricePerCup = .25;
+            pricePerLemon = Constants.storePricePerLemon;
+            pricePerSugarCube = Constants.storePricePerSugarCube;
+            pricePerIceCube = Constants.storePricePerIceCube;
+            pricePerCup = Constants.storePricePerCup;
         }
 
         // member methods
-        //public void SellItems(Player player)
-        //{
-        //    string item;
-
-
-
-        //    do
-        //    {
-        //        //item = UserInterface.PickItemForPurchase();
-        //        switch (item.ToUpper())
-        //        {
-        //            case "LEMONS":
-        //                SellLemons(player);
-        //                break;
-        //            case "SUGARCUBES":
-        //                SellSugarCubes(player);
-        //                break;
-        //            case "ICECUBES":
-        //                SellIceCubes(player);
-        //                break;
-        //            case "CUPS":
-        //                SellCups(player);
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    } while (true);
-        //}
-
         public void SellLemons(Player player)
         {
             bool validPurchase = false;
@@ -70,10 +41,11 @@ namespace LemonadeStand_3DayStarter
                 {
                     PerformTransaction(player.wallet, transactionAmount);
                     player.inventory.AddLemonsToInventory(lemonsToPurchase);
-                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                    UserInterface.DisplayStoreSale(transactionAmount, player.wallet.Money);
                 }
                 else
-                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+                    UserInterface.DisplayStoreNoSale(transactionAmount);
+
             } while (!validPurchase);
         }
 
@@ -93,10 +65,11 @@ namespace LemonadeStand_3DayStarter
                 {
                     PerformTransaction(player.wallet, transactionAmount);
                     player.inventory.AddSugarCubesToInventory(sugarToPurchase);
-                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                    UserInterface.DisplayStoreSale(transactionAmount, player.wallet.Money);
                 }
                 else
-                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+                    UserInterface.DisplayStoreNoSale(transactionAmount);
+
             } while (!validPurchase);
         }
 
@@ -116,10 +89,11 @@ namespace LemonadeStand_3DayStarter
                 {
                     PerformTransaction(player.wallet, transactionAmount);
                     player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
-                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                    UserInterface.DisplayStoreSale(transactionAmount, player.wallet.Money);
                 }
                 else
-                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+                    UserInterface.DisplayStoreNoSale(transactionAmount);
+
             } while (!validPurchase);
         }
 
@@ -140,10 +114,11 @@ namespace LemonadeStand_3DayStarter
                 {
                     PerformTransaction(player.wallet, transactionAmount);
                     player.inventory.AddCupsToInventory(cupsToPurchase);
-                    Console.WriteLine("Cost: {0:C}\tRemaining Money: {1:C}", transactionAmount, player.wallet.Money);
+                    UserInterface.DisplayStoreSale(transactionAmount, player.wallet.Money);
                 }
                 else
-                    Console.WriteLine("Not enough money. Cost: {0:C}", transactionAmount);
+                    UserInterface.DisplayStoreNoSale(transactionAmount);
+
             } while (!validPurchase);
         }
 

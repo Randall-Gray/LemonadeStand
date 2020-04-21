@@ -14,8 +14,17 @@ namespace LemonadeStand_3DayStarter
         public Cup()
         {
             name = "cup";
+            daysInInventory = 0;
         }
 
         // member methods
+        public override bool Spoiled()
+        {
+            daysInInventory++;
+            if (daysInInventory >= Constants.daysToSpoilCup)
+                return true;
+
+            return false;
+        }
     }
 }

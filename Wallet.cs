@@ -15,23 +15,16 @@ namespace LemonadeStand_3DayStarter
         // assossor methods
         public double Money
         {
-            get
-            {
-                return money;
-            }
+            get { return money; }
         }
 
         public double StartMoney
         {
-            get
-            {
-                return startMoney;
-            }
+            get { return startMoney; }
         }
 
-
         // constructor
-        public Wallet(double startMoney = 20.00)
+        public Wallet(double startMoney)
         {
             this.startMoney = startMoney;
             money = startMoney;

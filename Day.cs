@@ -9,6 +9,9 @@ namespace LemonadeStand_3DayStarter
     class Day
     {
         // member variables
+        public double moneySpent;
+        public double moneyMade;
+
         public Weather weather;
         public List<Customer> customers;
 
@@ -18,6 +21,9 @@ namespace LemonadeStand_3DayStarter
         // constructor
         public Day()
         {
+            moneySpent = 0;
+            moneyMade = 0;
+
             weather = new Weather();
             customers = new List<Customer>();
             customerTypes = new List<string>() { "Grandpa", "Grandma", "Mailman", "Nurse", "Business Man", "Business Woman", "Boy", "Girl", "Boyscout", "Girlscout", "Baby" };
@@ -31,34 +37,37 @@ namespace LemonadeStand_3DayStarter
         public void RunDay(Player player)
         {
             bool soldOut = false;
-            int customerSales = 0;
+            double customerSales = 0;
 
-            Console.WriteLine("\nCustomers: ");
+            UserInterface.DisplayCustomerHeader();
+
             for (int i = 0; i < customers.Count; i++)
             {
                 if (player.pitcher.cupsLeftInPitcher == 0)
                 {
                     soldOut = !player.MakePitcherOfLemonade();      // Out of ingredients
                 }
+
                 if (player.inventory.cups.Count == 0)               // Out of cups
                     soldOut = true;
 
+                UserInterface.DisplaySuppliesLine(player);
                 if (!soldOut && customers[i].BuysLemonade(weather, player.recipe))
                 {
-                    if (!player.PourLemonade())
+                    if (player.PourLemonade())
                     {
-                        Console.WriteLine(customers[i].name + " passed by.");
+                        player.wallet.PocketMoneyFromSales(player.recipe.pricePerCup);
+                        customerSales++;
+                        UserInterface.DisplayCustomerChoice(customers[i].name, true);
+                        continue;
                     }
-                    player.wallet.PocketMoneyFromSales(player.recipe.pricePerCup);
-                    customerSales++;
-                    Console.WriteLine(customers[i].name + " bought lemonade.");
                 }
-                else 
-                {
-                    Console.WriteLine(customers[i].name + " passed by.");
-                }
+                UserInterface.DisplayCustomerChoice(customers[i].name, false);
             }
-            Console.WriteLine("\nCustomers: " + customers.Count + "\tSales: " + customerSales);
+            moneyMade = customerSales * player.recipe.pricePerCup;
+            UserInterface.DisplayDaySales(customers.Count, customerSales, moneySpent, moneyMade);
+            
+            player.inventory.CheckForSpoilage();
         }
 
         // Number of customers depends on weather.  Customer type is random.
@@ -113,18 +122,18 @@ namespace LemonadeStand_3DayStarter
         // Number of customers is the day's temperature modified based on weather condition.
         private int NumberOfCustomers()
         {
-            int numberOfCustomers = weather.temperature;
+            int numberOfCustomers = weather.Temperature;
 
-            switch (weather.condition)
+            switch (weather.Condition)
             {
                 case "Rain":
-                    numberOfCustomers /= 2;
+                    numberOfCustomers = numberOfCustomers / 10 * Constants.weatherRainPercent;
                     break;
                 case "Hazy":
-                    numberOfCustomers = numberOfCustomers / 10 * 7;
+                    numberOfCustomers = numberOfCustomers / 10 * Constants.weatherHazyPercent;
                     break;
                 case "Cloudy":
-                    numberOfCustomers = numberOfCustomers / 10 * 8;
+                    numberOfCustomers = numberOfCustomers / 10 * Constants.weatherCloudyPercent;
                     break;
                 default:        // Sunny and Clear
                     break;

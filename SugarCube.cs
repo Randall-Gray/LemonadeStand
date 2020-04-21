@@ -14,8 +14,17 @@ namespace LemonadeStand_3DayStarter
         public SugarCube()
         {
             name = "sugar cube";
+            daysInInventory = 0;
         }
 
         // member methods
+        public override bool Spoiled()
+        {
+            daysInInventory++;
+            if (daysInInventory >= Constants.daysToSpoilSugarCube)
+                return true;
+
+            return false;
+        }
     }
 }

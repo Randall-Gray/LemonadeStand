@@ -30,17 +30,16 @@ namespace LemonadeStand_3DayStarter
 
             for (; currentDay < days.Count; currentDay++)
             {
-                DaySetup();
+                GetDayRecipeAndPrice();
+                GetDayInventory();
 
-                DisplayDayHeader("Sell Lemonade");
+                UserInterface.DisplayDayHeader("Sell Lemonade", player.name, currentDay, days.Count, days[currentDay].weather, days[currentDay].weather.ForcastWeather());
                 days[currentDay].RunDay(player);
 
                 UserInterface.DisplayDayGameStats(currentDay + 1, player.wallet.Money, player.wallet.StartMoney);
             }
 
             UserInterface.DisplayEndGameStats(currentDay, player.wallet.Money, player.wallet.StartMoney);
-
-            Console.ReadLine();
         }
 
         // Gets number of days and initializes days list and the currentDay.
@@ -54,28 +53,24 @@ namespace LemonadeStand_3DayStarter
             currentDay = 0;
         }
 
-        // Set up recipe and inventory for the day.
-        private void DaySetup()
+        // Set up recipe and price for the day.
+        private void GetDayRecipeAndPrice()
         {
             do
             {
-                DisplayDayHeader("Recipe and Price");
-                player.recipe.SetRecipeAndPrice();
-            } while (!UserInterface.Continue());
+                UserInterface.DisplayDayHeader("Recipe and Price", player.name, currentDay, days.Count, days[currentDay].weather, days[currentDay].weather.ForcastWeather());
+                player.recipe.SetRecipeAndPrice(store);
+            } while (UserInterface.AskUserYesOrNo("Everything okay") != true);
+        }
+
+        // Set up inventory for the day.
+        private void GetDayInventory()
+        {
             do
             {
-                DisplayDayHeader("Inventory");
-                player.inventory.PurchaseItems(store, player);
-            } while (!UserInterface.Continue());
+                UserInterface.DisplayDayHeader("Inventory", player.name, currentDay, days.Count, days[currentDay].weather, days[currentDay].weather.ForcastWeather());
+                days[currentDay].moneySpent += player.inventory.PurchaseItems(store, player);
+            } while (UserInterface.AskUserYesOrNo("Everything okay") != true);
         }
-
-        private void DisplayDayHeader(string setup)
-        {
-            Console.Clear();
-            Console.WriteLine(player.name + "'s Lemonade Stand");
-            Console.WriteLine("\nDay " + (currentDay + 1) + " of " + days.Count + "   (" + setup + ")");
-            days[currentDay].weather.DisplayWeather();
-        }
-
     }
 }

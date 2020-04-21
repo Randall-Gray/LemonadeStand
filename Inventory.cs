@@ -24,25 +24,94 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
-        public void PurchaseItems(Store store, Player player)
+        public double PurchaseItems(Store store, Player player)
         {
-            Console.WriteLine("\nMoney: ${0:C}", player.wallet.Money);
-            DisplayInventory();
+            double startMoney = player.wallet.Money;
+
+            UserInterface.DisplayMoneyInWallet(player);
+            UserInterface.DisplayInventory(this, store);
             store.SellLemons(player);
             store.SellSugarCubes(player);
             store.SellIceCubes(player);
             store.SellCups(player);
-            Console.WriteLine("\nMoney: ${0:N2}", player.wallet.Money);
-            DisplayInventory();
+            UserInterface.DisplayMoneySpent(startMoney - player.wallet.Money);
+            UserInterface.DisplayMoneyInWallet(player);
+            UserInterface.DisplayInventory(this, store);
+
+            return startMoney - player.wallet.Money;    // Money spent 
         }
 
-        public void DisplayInventory()
+        // Remove and report any spoiled inventory
+        public void CheckForSpoilage()
         {
-            Console.WriteLine("\nPlayer Inventory");
-            Console.WriteLine("Lemons: " + lemons.Count);
-            Console.WriteLine("Sugar Cubes: " + sugarCubes.Count);
-            Console.WriteLine("Ice Cubes: " + iceCubes.Count);
-            Console.WriteLine("Paper Cups: " + cups.Count);
+            CheckForSpoiledLemons();
+            CheckForSpoiledSugarCubes();
+            CheckForSpoiledIceCubes();
+            CheckForSpoiledCups();
+        }
+
+        private void CheckForSpoiledLemons()
+        {
+            int spoiledItems = 0;
+
+            for (int i = 0; i < lemons.Count; i++)
+            {
+                if (lemons[i].Spoiled())
+                {
+                    lemons.RemoveAt(i);
+                    spoiledItems++;
+                }
+            }
+            if (spoiledItems > 0)
+                UserInterface.DisplayItemsSpoiled("lemons", spoiledItems);
+        }
+
+        private void CheckForSpoiledSugarCubes()
+        {
+            int spoiledItems = 0;
+
+            for (int i = 0; i < sugarCubes.Count; i++)
+            {
+                if (sugarCubes[i].Spoiled())
+                {
+                    sugarCubes.RemoveAt(i);
+                    spoiledItems++;
+                }
+            }
+            if (spoiledItems > 0)
+                UserInterface.DisplayItemsSpoiled("sugar cubes", spoiledItems);
+        }
+
+        private void CheckForSpoiledIceCubes()
+        {
+            int spoiledItems = 0;
+
+            for (int i = 0; i < iceCubes.Count; i++)
+            {
+                if (iceCubes[i].Spoiled())
+                {
+                    iceCubes.RemoveAt(i);
+                    spoiledItems++;
+                }
+            }
+            if (spoiledItems > 0)
+                UserInterface.DisplayItemsSpoiled("ice cubes", spoiledItems);
+        }
+
+        private void CheckForSpoiledCups()
+        {
+            int spoiledItems = 0;
+
+            for (int i = 0; i < cups.Count; i++)
+            {
+                if (cups[i].Spoiled())
+                {
+                    cups.RemoveAt(i);
+                    spoiledItems++;
+                }
+            }
+            if (spoiledItems > 0)
+                UserInterface.DisplayItemsSpoiled("paper cups", spoiledItems);
         }
 
         public void AddLemonsToInventory(int numberOfLemons)

@@ -10,6 +10,7 @@ namespace LemonadeStand_3DayStarter
     {
         // member variables
         public string name;
+        protected int daysInInventory;
 
         // constructor
         static Item()
@@ -18,5 +19,6 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
+        public abstract bool Spoiled();
     }
 }

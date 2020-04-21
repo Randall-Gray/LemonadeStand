@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Baby.cs" />
     <Compile Include="Boy.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Cup.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Day.cs" />

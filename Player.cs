@@ -21,7 +21,7 @@ namespace LemonadeStand_3DayStarter
         {
             this.name = name;
             inventory = new Inventory();
-            wallet = new Wallet();
+            wallet = new Wallet(Constants.walletStartMoney);
             recipe = new Recipe();
             pitcher = new Pitcher();
         }
@@ -30,25 +30,28 @@ namespace LemonadeStand_3DayStarter
         public bool MakePitcherOfLemonade()
         {
             if (inventory.lemons.Count >= recipe.amountOfLemons &&
-                inventory.sugarCubes.Count >= recipe.amountOfSugarCubes &&
-                inventory.iceCubes.Count >= recipe.amountOfIceCubes)
+                inventory.sugarCubes.Count >= recipe.amountOfSugarCubes)
             {
-                pitcher.cupsLeftInPitcher = pitcher.maxCupsInPitcher;
+                pitcher.RefillPitcher();
 
                 inventory.RemoveLemonsFromInventory(recipe.amountOfLemons);
                 inventory.RemoveSugarCubesFromInventory(recipe.amountOfSugarCubes);
-                inventory.RemoveIceCubesFromInventory(recipe.amountOfIceCubes);
                 
                 return true;
             }
             return false;
         }
+
         public bool PourLemonade()
         {
-            if (inventory.cups.Count >= 1 && pitcher.cupsLeftInPitcher >= 1)
+            if (inventory.cups.Count >= 1 && 
+                inventory.iceCubes.Count >= recipe.amountOfIceCubes &&
+                pitcher.cupsLeftInPitcher >= 1)
             {
                 inventory.RemoveCupsFromInventory(1);
+                inventory.RemoveIceCubesFromInventory(recipe.amountOfIceCubes);
                 pitcher.cupsLeftInPitcher--;
+
                 return true;
             }
 

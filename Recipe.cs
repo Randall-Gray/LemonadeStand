@@ -26,23 +26,21 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
-        public void SetRecipeAndPrice()
+        public void SetRecipeAndPrice(Store store)
         {
-            DisplayRecipe();
+            UserInterface.DisplayRecipe(this, GetCostPerCup(store));
             amountOfLemons = UserInterface.GetNumberOfItemsForRecipe("lemons");
             amountOfSugarCubes = UserInterface.GetNumberOfItemsForRecipe("sugar cubes");
             amountOfIceCubes = UserInterface.GetNumberOfItemsForRecipe("ice cubes");
             pricePerCup = UserInterface.GetPricePerCup();
-            DisplayRecipe();
+            UserInterface.DisplayRecipe(this, GetCostPerCup(store));
         }
 
-        public void DisplayRecipe()
+        private double GetCostPerCup(Store store)
         {
-            Console.WriteLine("\nLemonade Recipe  (per 12 cup pitcher)");
-            Console.WriteLine("Lemons: " + amountOfLemons);
-            Console.WriteLine("Sugar Cubes: " + amountOfSugarCubes);
-            Console.WriteLine("Ice Cubes: " + amountOfIceCubes);
-            Console.WriteLine("\nPrice per cup: {0:C}\n", pricePerCup);
+            return (amountOfLemons * store.pricePerLemon + 
+                    amountOfSugarCubes * store.pricePerSugarCube) / Constants.maxCupsInPitcher
+                    + amountOfIceCubes * store.pricePerIceCube + store.pricePerCup;
         }
     }
 }

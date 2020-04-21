@@ -19,17 +19,17 @@ namespace LemonadeStand_3DayStarter
         // Member methods
         public override void SetName(string name)
         {
-            this.name = name + " " + maleNames[namePicker.Next(0, maleNames.Count)];
+            this.name = maleNames[namePicker.Next(0, maleNames.Count)] + " the " + name;
         }
 
         public override bool BuysLemonade(Weather weather, Recipe recipe)
         {
-            if (recipe.pricePerCup <= 1.00 &&
-                weather.temperature > 50 &&
+            if (recipe.pricePerCup <= Constants.manMaxPrice &&
+                weather.Temperature >= Constants.manMinTemp &&
                 recipe.amountOfSugarCubes == recipe.amountOfLemons)     // not too sweet or sour
             {
-                if ((weather.temperature > 70 && recipe.amountOfIceCubes >= 3) ||     // more ice when it's hot
-                    recipe.amountOfIceCubes >= 2)                                     
+                if ((weather.Temperature > Constants.manMoreIceTemp && recipe.amountOfIceCubes >= Constants.manMinIceHot) ||     // more ice when it's hot
+                    recipe.amountOfIceCubes >= Constants.manMinIce)                                     
                 {
                     return true;
                 }
@@ -37,6 +37,5 @@ namespace LemonadeStand_3DayStarter
 
             return false;
         }
-
     }
 }

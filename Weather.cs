@@ -9,11 +9,21 @@ namespace LemonadeStand_3DayStarter
     class Weather
     {
         // member variables
-        public string condition;
-        public int temperature;
-        private static List<string> weatherConditions;
+        private string condition;
+        public string Condition
+        {
+            get { return condition; }
+        }
 
-        private static Random weatherForcaster;
+        private int temperature;
+        public int Temperature
+        {
+            get { return temperature; }
+        }
+
+        static private List<string> weatherConditions;
+
+        static private Random weatherForcaster;
 
         // constructor
         public Weather()
@@ -30,12 +40,18 @@ namespace LemonadeStand_3DayStarter
         public void SetCurrentWeather()
         {
             condition = weatherConditions[weatherForcaster.Next(0, weatherConditions.Count - 1)];
-            temperature = weatherForcaster.Next(50, 100);
+            temperature = weatherForcaster.Next(Constants.weatherMinTemp, Constants.weatherMaxTemp);
         }
 
-        public void DisplayWeather()
+        // Forcast future weather.
+        public Weather ForcastWeather()
         {
-            Console.WriteLine("Weather: " + condition + "\tTemperature: " + temperature + "(F)");
+            Weather weatherForcast = new Weather();
+
+            weatherForcast.condition = weatherConditions[weatherForcaster.Next(0, weatherConditions.Count - 1)];
+            weatherForcast.temperature = weatherForcaster.Next(Constants.weatherMinTemp, Constants.weatherMaxTemp);
+
+            return weatherForcast;
         }
     }
 }
