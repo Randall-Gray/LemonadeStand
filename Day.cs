@@ -45,10 +45,11 @@ namespace LemonadeStand_3DayStarter
             {
                 if (player.pitcher.cupsLeftInPitcher == 0)
                 {
-                    soldOut = !player.MakePitcherOfLemonade();      // Out of ingredients
+                    soldOut = !player.MakePitcherOfLemonade();      // Out of ingredients - lemons and sugar cubes
                 }
 
-                if (player.inventory.cups.Count == 0)               // Out of cups
+                if (player.inventory.cups.Count == 0 ||               // Out of cups
+                    player.inventory.iceCubes.Count < player.recipe.amountOfIceCubes)   // Out of ice
                     soldOut = true;
 
                 UserInterface.DisplaySuppliesLine(player);
@@ -62,6 +63,8 @@ namespace LemonadeStand_3DayStarter
                         continue;
                     }
                 }
+                if (soldOut)
+                    UserInterface.DisplaySoldOut();
                 UserInterface.DisplayCustomerChoice(customers[i].name, false);
             }
             moneyMade = customerSales * player.recipe.pricePerCup;

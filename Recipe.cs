@@ -29,10 +29,10 @@ namespace LemonadeStand_3DayStarter
         public void SetRecipeAndPrice(Store store)
         {
             UserInterface.DisplayRecipe(this, GetCostPerCup(store));
-            amountOfLemons = UserInterface.GetNumberOfItemsForRecipe("lemons");
-            amountOfSugarCubes = UserInterface.GetNumberOfItemsForRecipe("sugar cubes");
-            amountOfIceCubes = UserInterface.GetNumberOfItemsForRecipe("ice cubes");
-            pricePerCup = UserInterface.GetPricePerCup();
+            amountOfLemons = UserInterface.GetNumberOfItemsForRecipe("lemons", amountOfLemons);
+            amountOfSugarCubes = UserInterface.GetNumberOfItemsForRecipe("sugar cubes", amountOfSugarCubes);
+            amountOfIceCubes = UserInterface.GetNumberOfItemsForRecipe("ice cubes", amountOfIceCubes);
+            pricePerCup = UserInterface.GetPricePerCup(pricePerCup);
             UserInterface.DisplayRecipe(this, GetCostPerCup(store));
         }
 

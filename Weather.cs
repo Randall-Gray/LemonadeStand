@@ -10,7 +10,7 @@ namespace LemonadeStand_3DayStarter
     {
         // member variables
         private string condition;
-        public string Condition
+        public string Condition 
         {
             get { return condition; }
         }
@@ -26,12 +26,14 @@ namespace LemonadeStand_3DayStarter
         static private Random weatherForcaster;
 
         // constructor
-        public Weather()
+        static Weather()
         {
-            weatherConditions = new List<string>() {"Rain", "Hazy", "Cloudy", "Sunny and Clear"};
+            weatherConditions = new List<string>() { "Rain", "Hazy", "Cloudy", "Sunny and Clear" };
 
             weatherForcaster = new Random();
-
+        }
+        public Weather()
+        {
             SetCurrentWeather();
         }
 

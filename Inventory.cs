@@ -54,7 +54,7 @@ namespace LemonadeStand_3DayStarter
         {
             int spoiledItems = 0;
 
-            for (int i = 0; i < lemons.Count; i++)
+            for (int i = lemons.Count - 1; i >= 0; i--)          // Set count first since removing items from list in loop.
             {
                 if (lemons[i].Spoiled())
                 {
@@ -63,14 +63,14 @@ namespace LemonadeStand_3DayStarter
                 }
             }
             if (spoiledItems > 0)
-                UserInterface.DisplayItemsSpoiled("lemons", spoiledItems);
+                UserInterface.DisplayItemsSpoiled("lemon(s)", spoiledItems);
         }
 
         private void CheckForSpoiledSugarCubes()
         {
             int spoiledItems = 0;
 
-            for (int i = 0; i < sugarCubes.Count; i++)
+            for (int i = sugarCubes.Count - 1; i >= 0; i--)          // Set count first since removing items from list in loop.
             {
                 if (sugarCubes[i].Spoiled())
                 {
@@ -79,14 +79,14 @@ namespace LemonadeStand_3DayStarter
                 }
             }
             if (spoiledItems > 0)
-                UserInterface.DisplayItemsSpoiled("sugar cubes", spoiledItems);
+                UserInterface.DisplayItemsSpoiled("sugar cube(s)", spoiledItems);
         }
 
         private void CheckForSpoiledIceCubes()
         {
             int spoiledItems = 0;
 
-            for (int i = 0; i < iceCubes.Count; i++)
+            for (int i = iceCubes.Count - 1; i >= 0; i--)   // Set count first since removing items from list in loop.
             {
                 if (iceCubes[i].Spoiled())
                 {
@@ -95,14 +95,14 @@ namespace LemonadeStand_3DayStarter
                 }
             }
             if (spoiledItems > 0)
-                UserInterface.DisplayItemsSpoiled("ice cubes", spoiledItems);
+                UserInterface.DisplayItemsMelted("ice cube(s)", spoiledItems);
         }
 
         private void CheckForSpoiledCups()
         {
             int spoiledItems = 0;
 
-            for (int i = 0; i < cups.Count; i++)
+            for (int i = cups.Count - 1; i >= 0; i--)            // Set count first since removing items from list in loop.
             {
                 if (cups[i].Spoiled())
                 {
@@ -111,7 +111,7 @@ namespace LemonadeStand_3DayStarter
                 }
             }
             if (spoiledItems > 0)
-                UserInterface.DisplayItemsSpoiled("paper cups", spoiledItems);
+                UserInterface.DisplayItemsSpoiled("paper cup(s)", spoiledItems);
         }
 
         public void AddLemonsToInventory(int numberOfLemons)

@@ -55,8 +55,9 @@ namespace LemonadeStand_3DayStarter
         }
 
         // Get number of items for recipe.
-        static public int GetNumberOfItemsForRecipe(string recipeItem)
+        static public int GetNumberOfItemsForRecipe(string recipeItem, int origAmount)
         {
+            string userInput;
             bool userInputIsAnInteger = false;
             int quantityOfItem = -1;
 
@@ -64,15 +65,25 @@ namespace LemonadeStand_3DayStarter
             {
                 Console.WriteLine("\nHow many " + recipeItem + " would you like in the recipe?");
                 Console.WriteLine("Please enter a positive integer (or 0):");
+                Console.WriteLine("(<Enter> to leave unchanged)");
 
-                userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
+                userInput = Console.ReadLine();
+
+                if (userInput == "")        // User didn't change number of items.
+                {
+                    quantityOfItem = origAmount;
+                    userInputIsAnInteger = true;
+                }
+                else
+                    userInputIsAnInteger = Int32.TryParse(userInput, out quantityOfItem);
             }
 
             return quantityOfItem;
         }
 
-        static public double GetPricePerCup()
+        static public double GetPricePerCup(double origPrice)
         {
+            string userInput;
             bool userInputIsADouble = false;
             double cupPrice = -1;
 
@@ -80,8 +91,17 @@ namespace LemonadeStand_3DayStarter
             {
                 Console.WriteLine("\nHow much would you like to charge for a cup of lemonade?");
                 Console.WriteLine("Please enter a positive dollar amount ($x.xx):");
+                Console.WriteLine("(<Enter> to leave unchanged)");
 
-                userInputIsADouble = double.TryParse(Console.ReadLine(), out cupPrice);
+                userInput = Console.ReadLine();
+
+                if (userInput == "")        // User didn't change price.
+                {
+                    cupPrice = origPrice;
+                    userInputIsADouble = true;
+                }
+                else
+                    userInputIsADouble = double.TryParse(userInput, out cupPrice);
             }
 
             return cupPrice;
@@ -90,6 +110,18 @@ namespace LemonadeStand_3DayStarter
         static public void DisplayWeather(Weather weather)
         {
             Console.WriteLine("\t" + weather.Condition + "\t" + weather.Temperature + "(F)");
+        }
+
+        // Display weather forcast (not actual weather) for entire length of game.
+        static public void DisplayEntireWeatherForcast(List<Day> days)
+        {
+            Console.WriteLine("\nWeather Forcast");
+            for (int i = 0; i < days.Count; i++)
+            {
+                Console.Write("Forcasted weather for day " + (i+1) + ":");
+                UserInterface.DisplayWeather(days[i].weather.ForcastWeather());
+            }
+            Console.ReadLine();
         }
 
         static public void DisplayStoreSale(double transactionAmount, double moneyLeft)
@@ -134,15 +166,21 @@ namespace LemonadeStand_3DayStarter
 
         static public void DisplayItemsSpoiled(string item, int numSpoiled)
         {
-            Console.WriteLine(numSpoiled + item + "(s) have spoiled and been removed from the inventory");
+            Console.WriteLine(numSpoiled +  " " +  item + " spoiled and have been removed from the inventory");
         }
+
+        static public void DisplayItemsMelted(string item, int numMelted)
+        {
+            Console.WriteLine(numMelted + " " + item + " melted and have been removed from the inventory");
+        }
+
 
         static public void DisplaySuppliesLine(Player player)
         {
             Console.WriteLine("Lemons: " + player.inventory.lemons.Count + 
-                              " Sugar Cubes: " + player.inventory.sugarCubes.Count +
-                              " Ice Cubes: " + player.inventory.iceCubes.Count +
-                              " Paper Cups: " + player.inventory.cups.Count +
+                              "; Sugar Cubes: " + player.inventory.sugarCubes.Count +
+                              "; Ice Cubes: " + player.inventory.iceCubes.Count +
+                              "; Paper Cups: " + player.inventory.cups.Count +
                               " Cups in Pitcher: " + player.pitcher.cupsLeftInPitcher);
         }
 
@@ -159,13 +197,18 @@ namespace LemonadeStand_3DayStarter
 
         static public void DisplayDayGameStats(int day, double currentMoney, double startMoney)
         {
-            Console.WriteLine("\nTotal Profit after day " + day + ": Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
+            Console.WriteLine("\nTotal Profit after day {0}: Money: {1:C} Profit: {2:C}", day, currentMoney, currentMoney - startMoney);
             Console.ReadLine();
         }
 
         static public void DisplayCustomerHeader()
         {
             Console.WriteLine("\nCustomers: ");
+        }
+
+        static public void DisplaySoldOut()
+        {
+            Console.WriteLine("SOLD OUT!  SORRY!");
         }
 
         static public void DisplayCustomerChoice(string name, bool boughtLemonade)
@@ -178,13 +221,13 @@ namespace LemonadeStand_3DayStarter
 
         static public void DisplayDaySales(int numCustomers, double numSales, double moneySpent, double moneyMade)
         {
-            Console.WriteLine("\nCustomers: {0}\tSales: {1}\tCash In: {2:C}\tCash Out: {3:C}", numCustomers, numSales, moneyMade, moneySpent);
+            Console.WriteLine("\nCustomers: {0}\tSales: {1}\tCash In: {2:C}\tCash Out: {3:C}\tProfit: {4,C}", numCustomers, numSales, moneyMade, moneySpent, moneyMade-moneySpent);
         }
 
         static public void DisplayEndGameStats(int days, double currentMoney, double startMoney)
         {
             Console.WriteLine("\nGAME OVER!");
-            Console.WriteLine("Total Profit after " + days + " days: Money: $" + currentMoney + " Profit: $" + (currentMoney - startMoney));
+            Console.WriteLine("Total Profit after {0} days: Money: {1:C} Profit: {2:C}", days, currentMoney, currentMoney - startMoney);
         }
 
         // Ask user a Yes or No question e.g. "Everything okay", "Play again"

@@ -50,6 +50,8 @@ namespace LemonadeStand_3DayStarter
             for (int i = 0; i < numDays; i++)
                 days.Add(new Day());
 
+            UserInterface.DisplayEntireWeatherForcast(days);
+
             currentDay = 0;
         }
 
