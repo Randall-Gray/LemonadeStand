@@ -115,13 +115,16 @@ namespace LemonadeStand_3DayStarter
         // Display weather forcast (not actual weather) for entire length of game.
         static public void DisplayEntireWeatherForcast(List<Day> days)
         {
-            Console.WriteLine("\nWeather Forcast");
-            for (int i = 0; i < days.Count; i++)
+            if (days.Count > 0)
             {
-                Console.Write("Forcasted weather for day " + (i+1) + ":");
-                UserInterface.DisplayWeather(days[i].weather.ForcastWeather());
+                Console.WriteLine("\nWeather Forcast");
+                for (int i = 0; i < days.Count; i++)
+                {
+                    Console.Write("Weather forcast for day " + (i + 1) + ":");
+                    UserInterface.DisplayWeather(days[i].weather.ForcastWeather());
+                }
+                Console.ReadLine();
             }
-            Console.ReadLine();
         }
 
         static public void DisplayStoreSale(double transactionAmount, double moneyLeft)
@@ -174,14 +177,13 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine(numMelted + " " + item + " melted and have been removed from the inventory");
         }
 
-
         static public void DisplaySuppliesLine(Player player)
         {
             Console.WriteLine("Lemons: " + player.inventory.lemons.Count + 
                               "; Sugar Cubes: " + player.inventory.sugarCubes.Count +
                               "; Ice Cubes: " + player.inventory.iceCubes.Count +
                               "; Paper Cups: " + player.inventory.cups.Count +
-                              " Cups in Pitcher: " + player.pitcher.cupsLeftInPitcher);
+                              "; Cups in Pitcher: " + player.pitcher.cupsLeftInPitcher);
         }
 
         static public void DisplayDayHeader(string dayDesc, string playerName, int currentDay, int totalDays, Weather todayWeather, Weather tomorrowWeather)
@@ -221,7 +223,7 @@ namespace LemonadeStand_3DayStarter
 
         static public void DisplayDaySales(int numCustomers, double numSales, double moneySpent, double moneyMade)
         {
-            Console.WriteLine("\nCustomers: {0}\tSales: {1}\tCash In: {2:C}\tCash Out: {3:C}\tProfit: {4,C}", numCustomers, numSales, moneyMade, moneySpent, moneyMade-moneySpent);
+            Console.WriteLine("\nCustomers: {0}\tSales: {1}\tCash In: {2:C}\tCash Out: {3:C}\tProfit: {4:C}", numCustomers, numSales, moneyMade, moneySpent, moneyMade-moneySpent);
         }
 
         static public void DisplayEndGameStats(int days, double currentMoney, double startMoney)

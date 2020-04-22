@@ -42,6 +42,7 @@ namespace LemonadeStand_3DayStarter
         static public int manMinIce { get; } = 2;
         static public int manMoreIceTemp { get; } = 70;
         static public int manMinIceHot { get; } = 3;
+        static public int manTwoCupTemp { get; } = 80;
 
         // Customer Woman
         static public double womanMaxPrice { get; } = .90;
@@ -49,6 +50,7 @@ namespace LemonadeStand_3DayStarter
         static public int womanMinIce { get; } = 2;
         static public int womanMoreIceTemp { get; } = 80;
         static public int womanMinIceHot { get; } = 3;
+        static public int womanTwoCupTemp { get; } = 80;
 
         // Customer Grandpa
         static public double grandpaMaxPrice { get; } = .60;

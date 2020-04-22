@@ -18,7 +18,7 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods
-        public override bool Spoiled()
+        public override bool Spoiled()      // ie. Melted
         {
             daysInInventory++;
             if (daysInInventory >= Constants.daysToSpoilIceCube)

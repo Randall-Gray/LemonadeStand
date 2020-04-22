@@ -10,14 +10,12 @@ namespace LemonadeStand_3DayStarter
     {
         // member variables
         private double money;
-        private double startMoney;
-
-        // assossor methods
         public double Money
         {
             get { return money; }
         }
 
+        private double startMoney;
         public double StartMoney
         {
             get { return startMoney; }

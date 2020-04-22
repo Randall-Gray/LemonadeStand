@@ -18,17 +18,17 @@ namespace LemonadeStand_3DayStarter
             this.name = femaleNames[namePicker.Next(0, maleNames.Count)] + " the " + name;
         }
 
-        public override bool BuysLemonade(Weather weather, Recipe recipe)
+        public override int BuysLemonade(Weather weather, Recipe recipe)
         {
             if (recipe.pricePerCup <= Constants.girlMaxPrice &&
                 weather.Condition != "Rain" &&
                 recipe.amountOfSugarCubes >= recipe.amountOfLemons &&      // sweet
                 recipe.amountOfIceCubes >= Constants.girlMinIce)
             {
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
         }
     }
 }

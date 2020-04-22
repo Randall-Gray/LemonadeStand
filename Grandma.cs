@@ -22,7 +22,7 @@ namespace LemonadeStand_3DayStarter
             this.name = femaleNames[namePicker.Next(0, maleNames.Count)] + " the " + name;
         }
 
-        public override bool BuysLemonade(Weather weather, Recipe recipe)
+        public override int BuysLemonade(Weather weather, Recipe recipe)
         {
             if (recipe.pricePerCup <= Constants.grandmaMaxPrice &&
                 weather.Condition != "Rain" &&
@@ -32,11 +32,11 @@ namespace LemonadeStand_3DayStarter
                 if ((weather.Temperature > Constants.grandmaMoreIceTemp && recipe.amountOfIceCubes >= Constants.grandmaMinIceHot) ||     // more ice when it's hot
                     recipe.amountOfIceCubes <= Constants.grandmaMinIce)                                     // otherwise, little ice
                 {
-                    return true;
+                    return 1;
                 }
             }
 
-            return false;
+            return 0;
         }
     }
 }

@@ -19,6 +19,13 @@ namespace LemonadeStand_3DayStarter
         static private Random customerSelector;
 
         // constructor
+        static Day()
+        {
+            customerTypes = new List<string>() { "Grandpa", "Grandma", "Mailman", "Nurse", "Business Man", "Business Woman", "Boy", "Girl", "Boyscout", "Girlscout", "Baby" };
+
+            customerSelector = new Random();
+        }
+
         public Day()
         {
             moneySpent = 0;
@@ -26,9 +33,6 @@ namespace LemonadeStand_3DayStarter
 
             weather = new Weather();
             customers = new List<Customer>();
-            customerTypes = new List<string>() { "Grandpa", "Grandma", "Mailman", "Nurse", "Business Man", "Business Woman", "Boy", "Girl", "Boyscout", "Girlscout", "Baby" };
-
-            customerSelector = new Random();
 
             InitializeCustomers();
         }
@@ -36,6 +40,7 @@ namespace LemonadeStand_3DayStarter
         // member methods
         public void RunDay(Player player)
         {
+            int numCups;
             bool soldOut = false;
             double customerSales = 0;
 
@@ -43,30 +48,44 @@ namespace LemonadeStand_3DayStarter
 
             for (int i = 0; i < customers.Count; i++)
             {
-                if (player.pitcher.cupsLeftInPitcher == 0)
-                {
-                    soldOut = !player.MakePitcherOfLemonade();      // Out of ingredients - lemons and sugar cubes
-                }
+                numCups = 0;    // Number of cups a customer wants.  They may ask for more than one.
 
-                if (player.inventory.cups.Count == 0 ||               // Out of cups
-                    player.inventory.iceCubes.Count < player.recipe.amountOfIceCubes)   // Out of ice
-                    soldOut = true;
-
-                UserInterface.DisplaySuppliesLine(player);
-                if (!soldOut && customers[i].BuysLemonade(weather, player.recipe))
+                do
                 {
-                    if (player.PourLemonade())
+                    if (player.pitcher.cupsLeftInPitcher == 0)
                     {
-                        player.wallet.PocketMoneyFromSales(player.recipe.pricePerCup);
-                        customerSales++;
-                        UserInterface.DisplayCustomerChoice(customers[i].name, true);
-                        continue;
+                        soldOut = !player.MakePitcherOfLemonade();      // Out of ingredients - lemons and sugar cubes
                     }
-                }
-                if (soldOut)
-                    UserInterface.DisplaySoldOut();
-                UserInterface.DisplayCustomerChoice(customers[i].name, false);
+
+                    if (player.inventory.cups.Count == 0 ||               // Out of cups
+                        player.inventory.iceCubes.Count < player.recipe.amountOfIceCubes)   // Out of ice
+                        soldOut = true;
+
+                    UserInterface.DisplaySuppliesLine(player);
+                    if (!soldOut && numCups == 0)
+                        numCups = customers[i].BuysLemonade(weather, player.recipe);
+                    if (!soldOut && numCups > 0)
+                    {
+                        if (player.PourLemonade())      // Can't actually fail since inventory is already checked
+                        {
+                            player.wallet.PocketMoneyFromSales(player.recipe.pricePerCup);
+                            customerSales++;
+                            numCups--;
+                            UserInterface.DisplayCustomerChoice(customers[i].name, true);
+                            continue;
+                        }
+                    }
+                    if (soldOut)
+                    {
+                        UserInterface.DisplaySoldOut();
+                        numCups = 0;    
+                    }
+                    UserInterface.DisplayCustomerChoice(customers[i].name, false);
+                } 
+                while (numCups > 0);        // Customer asking for more than 1 cup, goes through line again.
             }
+            UserInterface.DisplaySuppliesLine(player);      // Display the final supply list.
+
             moneyMade = customerSales * player.recipe.pricePerCup;
             UserInterface.DisplayDaySales(customers.Count, customerSales, moneySpent, moneyMade);
             

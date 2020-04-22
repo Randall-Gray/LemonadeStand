@@ -12,6 +12,7 @@ namespace LemonadeStand_3DayStarter
         // amount of ingredients per pitcher
         public int amountOfLemons;
         public int amountOfSugarCubes;
+        // amount of ingredients per cup
         public int amountOfIceCubes;
 
         public double pricePerCup;

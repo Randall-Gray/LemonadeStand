@@ -21,9 +21,9 @@ namespace LemonadeStand_3DayStarter
                 this.name = femaleNames[namePicker.Next(0, maleNames.Count)] + " the " + name;
         }
 
-        public override bool BuysLemonade(Weather weather, Recipe recipe)
+        public override int BuysLemonade(Weather weather, Recipe recipe)
         {
-            return false;       // Baby's don't drink lemonade!!
+            return 0;       // Baby's don't drink lemonade!!
         }
     }
 }

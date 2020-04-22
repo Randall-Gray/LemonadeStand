@@ -30,6 +30,7 @@ namespace LemonadeStand_3DayStarter
         public abstract void SetName(string name);
 
         // Decide if customer will buy lemonade based on weather, recipe, and personal preferences.
-        public abstract bool BuysLemonade(Weather weather, Recipe recipe);
+        // Returns how many cups the customer will buy.
+        public abstract int BuysLemonade(Weather weather, Recipe recipe);
     }
 }
